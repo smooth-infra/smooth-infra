@@ -3,7 +3,6 @@ module github.com/smooth-infra/smooth-infra
 go 1.20
 
 require (
-	github.com/joho/godotenv v1.5.1
 	github.com/stretchr/testify v1.8.2
 	gopkg.in/yaml.v3 v3.0.1
 )
