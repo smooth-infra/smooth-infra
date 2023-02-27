@@ -33,7 +33,7 @@ Here's a very basic example:
 version: 1
 input:
   terraform:
-    outputs_file: stubs/output.vars
+    outputs_file: output.vars
   tests:
     - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
       type: http/request
