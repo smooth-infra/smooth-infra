@@ -1,6 +1,6 @@
 # smooth-infra
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/smooth-infra/smooth-infra)](https://goreportcard.com/report/github.com/smooth-infra/smooth-infra) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/smooth-infra/smooth-infra)](https://goreportcard.com/report/github.com/smooth-infra/smooth-infra)
 
 ## Introduction
 
