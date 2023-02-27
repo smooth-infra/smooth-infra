@@ -36,5 +36,5 @@ input:
 	var myOutputs map[string]string
 	myOutputs, err = godotenv.Read(structure.Input.Terraform.OutputsFile)
 
-	assert.Equal(t, "ggg.com", myOutputs["address"], "The address in outputs_file is not what is expected")
+	assert.Equal(t, "google.com", myOutputs["address"], "The address in outputs_file is not what is expected")
 }
