@@ -2,13 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/smooth-infra/smooth-infra)](https://goreportcard.com/report/github.com/smooth-infra/smooth-infra) 
 
-## Background
-
-As a DevOps Engineer and Cloud Architect, I always find myself dealing with infrastructural testing. For some it is fun, for some it is not, but it's a necessary pain to make sure that what you're building works as expected. I came up with this project because I'm myself sometimes overwhelmed by the infrastructural tests complexity, without even counting how long it takes to write these tests.
-
-Because of these issues, sometimes infrastructural tests are overlooked and skipped, which may cause problems in the long-run in your precious production environments. This is why I came up with **smooth-infra**.
-
-## Why smooth-infra?
+## Introduction
 
 You've just designed your perfect cloud infrastructure.
 
@@ -49,6 +43,12 @@ input:
       expects:
         status_code: 200
 ```
+
+## Why smooth-infra can make your life easier
+
+As a DevOps Engineer and Cloud Architect, I always find myself dealing with infrastructural testing. For some it is fun, for some it is not, but it's a necessary pain to make sure that what you're building works as expected. I came up with this project because I'm myself sometimes overwhelmed by the infrastructural tests complexity, without even counting how long it takes to write these tests.
+
+Because of these issues, sometimes infrastructural tests are overlooked and skipped, which may cause problems in the long-run in your precious production environments. This is why I came up with **smooth-infra**.
 
 ## Contributing
 
