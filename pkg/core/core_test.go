@@ -64,7 +64,7 @@ input:
   terraform:
     outputs_file: %s
 tests:
-  - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
+  - name: "Verify that requesting ${input.terraform.address} is giving a 200 OK"
     type: http/request
     params:
       address: ${input.terraform.address}
@@ -73,15 +73,4 @@ tests:
       status_code: 200
     `, outputsFilePath,
 	)
-}
-
-func getNullTestData() string {
-	return `
----
-version: 1
-tests:
-  - name: some null test for testing purposes
-    type: null/null
-    id: test_with_id
-`
 }
