@@ -27,3 +27,5 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
         files: ./profile.cov
+        fail_ci_if_error: true
+        flags: unittests
