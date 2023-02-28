@@ -9,22 +9,23 @@ import (
 	"testing"
 
 	"github.com/smooth-infra/smooth-infra/pkg/http"
+	"github.com/smooth-infra/smooth-infra/pkg/null"
 	"github.com/smooth-infra/smooth-infra/pkg/terraform"
 	"github.com/smooth-infra/smooth-infra/pkg/yaml"
 
 	"path/filepath"
 
-	"github.com/gosimple/slug"
 	"github.com/stretchr/testify/require"
 )
 
 type TestFunction func(t *testing.T, params map[string]interface{}, expects map[string]interface{}) error
 
 var availableTests = map[string]TestFunction{
+	"null/null":    null.Null,
 	"http/request": http.Request,
 }
 
-func RunTests(t *testing.T, yamlSource io.Reader) map[string]error {
+func Run(t *testing.T, yamlSource io.Reader) map[string]error {
 	var filePath string
 	if file, ok := yamlSource.(*os.File); ok {
 		filePath = filepath.ToSlash(file.Name())
@@ -51,16 +52,7 @@ func RunTests(t *testing.T, yamlSource io.Reader) map[string]error {
 		config.ProcessTests(config.GetInputName(), outputValues)
 	}
 
-	errors := make(map[string]error)
-	for _, test := range config.Tests {
-		if function, ok := availableTests[test.Type]; ok {
-			t.Logf("Running \"%s\" (%s) test...", test.Name, test.Type)
-			err = function(t, test.Params, test.Expects)
-			if err != nil {
-				slug := slug.Make(test.Name)
-				errors[slug] = err
-			}
-		}
-	}
+	errors := ExecuteTests(t, config)
+
 	return errors
 }

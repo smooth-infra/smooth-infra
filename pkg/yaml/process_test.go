@@ -2,10 +2,10 @@ package yaml
 
 import (
 	"fmt"
-	"os"
 	"testing"
 
 	"github.com/smooth-infra/smooth-infra/pkg/terraform"
+	"github.com/smooth-infra/smooth-infra/pkg/utilities"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -28,7 +28,7 @@ func TestIfCanDetermineInputName(t *testing.T) {
 }
 
 func TestIfCanReplaceTerraformOutputsToTests(t *testing.T) {
-	testData := `
+	outputs := `
 {
   "address": {
       "sensitive": false,
@@ -38,16 +38,8 @@ func TestIfCanReplaceTerraformOutputsToTests(t *testing.T) {
 }
 `
 
-	tempFile, err := os.CreateTemp("", "outputs.json")
-	if err != nil {
-		t.Fatalf("Error creating temporary file: %v", err)
-	}
-	defer os.Remove(tempFile.Name())
-	_, err = tempFile.WriteString(testData)
-	if err != nil {
-		t.Fatalf("Error writing test data to file: %v", err)
-	}
-	tempFile.Close()
+	tempFile, cleanup := utilities.CreateTestFile(t, outputs)
+	defer cleanup()
 
 	yamlTestFile := getTestData(tempFile.Name())
 
