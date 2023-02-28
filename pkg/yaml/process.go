@@ -20,6 +20,7 @@ type Input struct {
 
 type Test struct {
 	Name    string
+	Id      string
 	Type    string
 	Params  map[string]interface{}
 	Expects map[string]interface{}

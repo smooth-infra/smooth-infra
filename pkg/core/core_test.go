@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -61,10 +62,15 @@ func TestIfItCanRunASimpleFailingTest(t *testing.T) {
 	tempFile.Close()
 
 	yamlTestFile := getTestData(tempFile.Name())
-
 	errors := RunTests(t, strings.NewReader(yamlTestFile))
 
 	require.NotEmpty(t, errors)
+	for k := range errors {
+		errorName := k
+		assert.Equal(t, "verify-that-requesting-somefailingwebsitethatdoesnotexist-com-is-giving-a-200-ok", errorName)
+		break
+	}
+
 }
 
 func getTestData(outputsFilePath string) string {

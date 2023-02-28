@@ -10,6 +10,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestIfTestIdWorks(t *testing.T) {
+	config, err := Process(getNullTestData())
+	require.Nil(t, err)
+	assert.Equal(t, "test_with_id", config.Tests[0].Id)
+}
+
 func TestProcessSimpleYaml(t *testing.T) {
 	config, err := Process(getTestData("output.vars"))
 	require.Nil(t, err)
@@ -80,4 +86,15 @@ tests:
       status_code: 200
     `, outputsFilePath,
 	)
+}
+
+func getNullTestData() string {
+	return `
+---
+version: 1
+tests:
+  - name: some null test for testing purposes
+    type: null/null
+    id: test_with_id
+`
 }
