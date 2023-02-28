@@ -2,7 +2,7 @@ package utilities
 
 import (
 	"os"
-	testing "testing"
+	"testing"
 )
 
 func CreateTestFile(t *testing.T, data string) (*os.File, func()) {
