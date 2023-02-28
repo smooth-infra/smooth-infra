@@ -20,7 +20,7 @@ github.com/pmezard/go-difflib/difflib
 ## explicit; go 1.13
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
-# golang.org/x/net v0.0.0-20210614182718-04defd469f4e
+# golang.org/x/net v0.7.0
 ## explicit; go 1.17
 golang.org/x/net/context
 # gopkg.in/yaml.v3 v3.0.1
