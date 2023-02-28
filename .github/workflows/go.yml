@@ -25,3 +25,5 @@ jobs:
       run: go test -v ./... -v -coverpkg=./... -coverprofile=profile.cov ./... && go tool cover -func profile.cov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
+      with:
+        files: ./profile.cov

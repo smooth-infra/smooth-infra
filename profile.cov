@@ -1,0 +1,8 @@
+mode: set
+github.com/smooth-infra/smooth-infra/pkg/http/request.go:5.21,7.2 1 1
+github.com/smooth-infra/smooth-infra/pkg/http/request.go:9.13,11.2 1 0
+github.com/smooth-infra/smooth-infra/pkg/terraform/input.go:18.50,21.16 3 1
+github.com/smooth-infra/smooth-infra/pkg/terraform/input.go:21.16,23.3 1 0
+github.com/smooth-infra/smooth-infra/pkg/terraform/input.go:25.2,26.16 2 1
+github.com/smooth-infra/smooth-infra/pkg/terraform/input.go:26.16,28.3 1 0
+github.com/smooth-infra/smooth-infra/pkg/terraform/input.go:29.2,29.18 1 1
