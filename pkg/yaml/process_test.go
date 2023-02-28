@@ -10,10 +10,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestIfCanDetermineInputName(t *testing.T) {
-	structure, err := Process(getTestData("output.vars"))
+func TestProcessSimpleYaml(t *testing.T) {
+	config, err := Process(getTestData("output.vars"))
 	require.Nil(t, err)
-	assert.Equal(t, "terraform", structure.GetInputName(), "The input name is not what is expected")
+	assert.Equal(t, "output.vars", config.Input["terraform"].OutputsFile, "The outputs_file is not what is expected")
+}
+
+func TestProcessingOfInvalidYaml(t *testing.T) {
+	_, err := Process("invalid yaml")
+	require.NotNil(t, err)
+}
+
+func TestIfCanDetermineInputName(t *testing.T) {
+	config, err := Process(getTestData("output.vars"))
+	require.Nil(t, err)
+	assert.Equal(t, "terraform", config.GetInputName(), "The input name is not what is expected")
 }
 
 func TestIfCanReplaceTerraformOutputsToTests(t *testing.T) {
@@ -69,10 +80,4 @@ tests:
       status_code: 200
     `, outputsFilePath,
 	)
-}
-
-func TestProcessSimpleYaml(t *testing.T) {
-	structure, err := Process(getTestData("output.vars"))
-	require.Nil(t, err)
-	assert.Equal(t, "output.vars", structure.Input["terraform"].OutputsFile, "The outputs_file is not what is expected")
 }
