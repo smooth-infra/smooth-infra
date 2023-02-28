@@ -2,12 +2,12 @@ package yaml
 
 type BaseStructure struct {
 	Version int
-	Input   struct {
-		Terraform struct {
-			OutputsFile string `yaml:"outputs_file"`
-		}
-	}
-	Tests []Test
+	Input   map[string]Input `yaml:"input"`
+	Tests   []Test
+}
+
+type Input struct {
+	OutputsFile string `yaml:"outputs_file"`
 }
 
 type Test struct {
