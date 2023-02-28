@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -32,7 +33,7 @@ func TestIfItCanRunASimpleSuccessfulTest(t *testing.T) {
 
 	yamlTestFile := getTestData(tempFile.Name())
 
-	errors := RunTests(t, yamlTestFile)
+	errors := RunTests(t, strings.NewReader(yamlTestFile))
 
 	require.Empty(t, errors)
 }
@@ -61,7 +62,7 @@ func TestIfItCanRunASimpleFailingTest(t *testing.T) {
 
 	yamlTestFile := getTestData(tempFile.Name())
 
-	errors := RunTests(t, yamlTestFile)
+	errors := RunTests(t, strings.NewReader(yamlTestFile))
 
 	require.NotEmpty(t, errors)
 }

@@ -1,0 +1,7 @@
+{
+    "address": {
+        "sensitive": false,
+        "type": "string",
+        "value": "google.com"
+    }
+}

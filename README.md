@@ -2,7 +2,31 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/smooth-infra/smooth-infra)](https://goreportcard.com/report/github.com/smooth-infra/smooth-infra) [![codecov](https://codecov.io/gh/smooth-infra/smooth-infra/branch/main/graph/badge.svg?token=KVB6AVHPI5)](https://codecov.io/gh/smooth-infra/smooth-infra) [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
-## Introduction
+## Usage
+
+```golang
+package main
+
+import (
+	"os"
+	"testing"
+
+	"github.com/smooth-infra/smooth-infra/pkg/core"
+	"github.com/stretchr/testify/require"
+)
+
+func TestInfra(t *testing.T) {
+	file, err := os.Open("./../examples/http/request.yaml")
+	require.Nil(t, err)
+
+	defer file.Close()
+
+	errors := core.RunTests(t, file)
+	require.NotNil(t, errors)
+}
+```
+
+## Background
 
 You've just designed your perfect cloud infrastructure.
 
@@ -26,23 +50,6 @@ Furthermore, what if you don't know Golang?
 How?
 
 By abstracting your tests in very simple human-readable YAML files, easy to scale, easy to write, easy to read.
-
-Here's a very basic example:
-```yaml
----
-version: 1
-input:
-  terraform:
-    outputs_file: output.vars
-  tests:
-    - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
-      type: http/request
-      params:
-        address: ${input.terraform.address}
-        secure: true
-      expects:
-        status_code: 200
-```
 
 ## Why smooth-infra can make your life easier
 

@@ -2,12 +2,12 @@
 version: 1
 input:
   terraform:
-    outputs_file: stubs/output.vars
-  tests:
-    - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
-      type: http/request
-      params:
-        address: ${input.terraform.address}
-        secure: true
-      expects:
-        status_code: 200
+    outputs_file: terraform_outputs.json
+tests:
+  - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
+    type: http/request
+    params:
+      address: ${input.terraform.address}
+      secure: true
+    expects:
+      status_code: 200
