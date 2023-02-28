@@ -14,6 +14,6 @@ func TestInfra(t *testing.T) {
 
 	defer file.Close()
 
-	errors := core.RunTests(t, file)
+	errors := core.Run(t, file)
 	require.NotNil(t, errors)
 }

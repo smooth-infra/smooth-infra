@@ -26,7 +26,7 @@ var availableTests = map[string]TestFunction{
 	"http/request": http.Request,
 }
 
-func RunTests(t *testing.T, yamlSource io.Reader) map[string]error {
+func Run(t *testing.T, yamlSource io.Reader) map[string]error {
 	var filePath string
 	if file, ok := yamlSource.(*os.File); ok {
 		filePath = filepath.ToSlash(file.Name())
@@ -53,11 +53,18 @@ func RunTests(t *testing.T, yamlSource io.Reader) map[string]error {
 		config.ProcessTests(config.GetInputName(), outputValues)
 	}
 
+	errors := ExecuteTests(t, config)
+
+	return errors
+}
+
+func ExecuteTests(t *testing.T, config *yaml.BaseStructure) map[string]error {
 	errors := make(map[string]error)
+
 	for _, test := range config.Tests {
 		if function, ok := availableTests[test.Type]; ok {
 			t.Logf("Running \"%s\" (%s) test...", test.Name, test.Type)
-			err = function(t, test.Params, test.Expects)
+			err := function(t, test.Params, test.Expects)
 			if err != nil {
 				if test.Id != "" {
 					errors[test.Id] = err
@@ -68,5 +75,6 @@ func RunTests(t *testing.T, yamlSource io.Reader) map[string]error {
 			}
 		}
 	}
+
 	return errors
 }

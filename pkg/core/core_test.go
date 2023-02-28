@@ -2,16 +2,16 @@ package core
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"testing"
 
+	"github.com/smooth-infra/smooth-infra/pkg/utilities"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestIfItCanRunASimpleSuccessfulTest(t *testing.T) {
-	testData := `
+	outputs := `
 {
   "address": {
       "sensitive": false,
@@ -21,26 +21,18 @@ func TestIfItCanRunASimpleSuccessfulTest(t *testing.T) {
 }
 `
 
-	tempFile, err := os.CreateTemp("", "outputs.json")
-	if err != nil {
-		t.Fatalf("Error creating temporary file: %v", err)
-	}
-	defer os.Remove(tempFile.Name())
-	_, err = tempFile.WriteString(testData)
-	if err != nil {
-		t.Fatalf("Error writing test data to file: %v", err)
-	}
-	tempFile.Close()
+	tempFile, cleanup := utilities.CreateTestFile(t, outputs)
+	defer cleanup()
 
-	yamlTestFile := getTestData(tempFile.Name())
+	yamlConfig := getTestConfig(tempFile.Name())
 
-	errors := RunTests(t, strings.NewReader(yamlTestFile))
+	errors := Run(t, strings.NewReader(yamlConfig))
 
 	require.Empty(t, errors)
 }
 
 func TestIfItCanRunASimpleFailingTest(t *testing.T) {
-	testData := `
+	outputs := `
 {
   "address": {
       "sensitive": false,
@@ -50,19 +42,11 @@ func TestIfItCanRunASimpleFailingTest(t *testing.T) {
 }
 `
 
-	tempFile, err := os.CreateTemp("", "outputs.json")
-	if err != nil {
-		t.Fatalf("Error creating temporary file: %v", err)
-	}
-	defer os.Remove(tempFile.Name())
-	_, err = tempFile.WriteString(testData)
-	if err != nil {
-		t.Fatalf("Error writing test data to file: %v", err)
-	}
-	tempFile.Close()
+	tempFile, cleanup := utilities.CreateTestFile(t, outputs)
+	defer cleanup()
+	yamlConfig := getTestConfig(tempFile.Name())
 
-	yamlTestFile := getTestData(tempFile.Name())
-	errors := RunTests(t, strings.NewReader(yamlTestFile))
+	errors := Run(t, strings.NewReader(yamlConfig))
 
 	require.NotEmpty(t, errors)
 	for k := range errors {
@@ -70,10 +54,9 @@ func TestIfItCanRunASimpleFailingTest(t *testing.T) {
 		assert.Equal(t, "verify-that-requesting-somefailingwebsitethatdoesnotexist-com-is-giving-a-200-ok", errorName)
 		break
 	}
-
 }
 
-func getTestData(outputsFilePath string) string {
+func getTestConfig(outputsFilePath string) string {
 	return fmt.Sprintf(`
 ---
 version: 1
@@ -90,4 +73,15 @@ tests:
       status_code: 200
     `, outputsFilePath,
 	)
+}
+
+func getNullTestData() string {
+	return `
+---
+version: 1
+tests:
+  - name: some null test for testing purposes
+    type: null/null
+    id: test_with_id
+`
 }
