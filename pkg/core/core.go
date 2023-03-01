@@ -8,8 +8,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/smooth-infra/smooth-infra/pkg/http"
-	"github.com/smooth-infra/smooth-infra/pkg/null"
 	"github.com/smooth-infra/smooth-infra/pkg/terraform"
 	"github.com/smooth-infra/smooth-infra/pkg/yaml"
 
@@ -17,13 +15,6 @@ import (
 
 	"github.com/stretchr/testify/require"
 )
-
-type TestFunction func(t *testing.T, params map[string]interface{}, expects map[string]interface{}) error
-
-var availableTests = map[string]TestFunction{
-	"null/null":    null.Null,
-	"http/request": http.Request,
-}
 
 func Run(t *testing.T, yamlSource io.Reader) map[string]error {
 	var filePath string

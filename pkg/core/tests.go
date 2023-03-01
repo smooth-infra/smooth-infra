@@ -1,11 +1,20 @@
 package core
 
 import (
+	"net/http"
 	"testing"
 
 	"github.com/gosimple/slug"
+	"github.com/smooth-infra/smooth-infra/pkg/null"
 	"github.com/smooth-infra/smooth-infra/pkg/yaml"
 )
+
+type TestFunction func(t *testing.T, params map[string]interface{}, expects map[string]interface{}) error
+
+var availableTests = map[string]TestFunction{
+	"null/null":    null.Null,
+	"http/request": http.Request,
+}
 
 func ExecuteTests(t *testing.T, config *yaml.BaseStructure) map[string]error {
 	errors := make(map[string]error)

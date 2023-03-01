@@ -4,6 +4,27 @@
 
 ## Usage
 
+After applying your Terraform code, let's verify that the endpoint provided by Terraform responds 200 OK.
+
+First, let's create a configuration file called `test_terraform_endpoint.yml`
+
+```yaml
+version: 1
+input:
+  terraform:
+    outputs_file: terraform_outputs.json
+tests:
+  - name: Verify that requesting ${input.terraform.address} is giving a 200 OK
+    type: http/request
+    params:
+      address: ${input.terraform.address}
+      secure: true
+    expects:
+      status_code: 200
+```
+
+Then let's execute the tests in a Go test file: 
+
 ```golang
 package main
 
@@ -16,7 +37,7 @@ import (
 )
 
 func TestInfra(t *testing.T) {
-	file, err := os.Open("./../examples/http/request.yaml")
+	file, err := os.Open("test_terraform_endpoint.yml")
 	require.Nil(t, err)
 
 	defer file.Close()
@@ -65,4 +86,4 @@ If you have any idea for any functionality, or if you find a bug in the code, pl
 
 ## License
 
-This project uses [Mozilla Public License 2.0](/LICENSE).
+This project uses [Apache-2.0 license](/LICENSE).
