@@ -1,10 +1,10 @@
 package core
 
 import (
-	"net/http"
 	"testing"
 
 	"github.com/gosimple/slug"
+	"github.com/smooth-infra/smooth-infra/pkg/http"
 	"github.com/smooth-infra/smooth-infra/pkg/null"
 	"github.com/smooth-infra/smooth-infra/pkg/yaml"
 )
