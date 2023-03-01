@@ -80,9 +80,7 @@ Because of these issues, sometimes infrastructural tests are overlooked and skip
 
 ## Contributing
 
-This project is extremely new and it is also my first open-source serious project. I am extremely excited to begin such a project as I find infrastructural testing to be really important to make sure that our infrastructure works as expected.
-
-If you have any idea for any functionality, or if you find a bug in the code, please create an [Issue](https://github.com/smooth-infra/smooth-infra/issues/new) or a [Pull Request](https://github.com/smooth-infra/smooth-infra/compare) and I'll make sure to check it as soon as possible!
+You can find more information in the [CONTRIBUTING.md](/CONTRIBUTING.md) file.
 
 ## License
 
