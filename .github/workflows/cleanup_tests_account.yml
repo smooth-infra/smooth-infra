@@ -4,6 +4,9 @@ on:
   schedule:
     - cron:  '0 * * * *'
   workflow_dispatch:
+  
+env:
+  AWS_NUKE_VERSION: v2.21.2
     
 jobs:
   cleanup_tests_account:
@@ -27,14 +30,15 @@ jobs:
       - uses: actions/cache@v2
         id: aws-nuke
         with: 
-          path: aws-nuke  
+          path: aws-nuke
+          key: ${{ runner.os }}-aws-nuke-v2.21.2
         
       - name: Download AWS Nuke
         if: steps.aws-nuke.outputs.cache-hit != 'true'
         run: |
-          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/v2.21.2/aws-nuke-v2.21.2-linux-arm64.tar.gz | tar -xz -C ${{ github.workspace }} && \
-            mv ${{ github.workspace }}/aws-nuke-v2.21.2-linux-arm64/aws-nuke ${{ github.workspace }} && \
-            rm -rf /aws-nuke-v2.21.2-linux-arm64 && \
+          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/${{ env.AWS_NUKE_VERSION }}/aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64.tar.gz | tar -xz -C ${{ github.workspace }} && \
+            mv ${{ github.workspace }}/aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64/aws-nuke ${{ github.workspace }} && \
+            rm -rf /aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64 && \
             chmod +x aws-nuke
             
       - name: Run AWS Nuke
