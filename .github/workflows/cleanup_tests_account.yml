@@ -21,7 +21,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::994884320581:role/GitHubCICD
-          role-session-name: github-cicd-smooth-infra
+          role-session-name: ${{ github.job }}-${{ github.run_number }}-${{ github.run_attempt }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: sts get-caller-identity
