@@ -32,14 +32,14 @@ jobs:
         id: aws-nuke
         with: 
           path: aws-nuke
-          key: ${{ runner.os }}-aws-nuke-v2.21.2
+          key: ${{ runner.os }}-aws-nuke-${{ env.AWS_NUKE_VERSION }}
         
       - name: Download AWS Nuke
         if: steps.aws-nuke.outputs.cache-hit != 'true'
         run: |
-          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/v2.21.2/aws-nuke-v2.21.2-linux-arm64.tar.gz -o aws-nuke.tar.gz && \
+          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/${{ env.AWS_NUKE_VERSION }}/aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64.tar.gz -o aws-nuke.tar.gz && \
             tar -xf aws-nuke.tar.gz && \
-            mv aws-nuke-v2.21.2-linux-arm64 aws-nuke && \
+            mv aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64 aws-nuke && \
             rm -rf aws-nuke.tar.gz && \
             chmod +x aws-nuke
             
