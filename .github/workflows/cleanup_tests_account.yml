@@ -5,6 +5,7 @@ on:
 jobs:
   cleanup_tests_account:
     name: Cleanup Test Account
+    environment: smooth-infra-tests 
     runs-on: ubuntu-latest
     permissions:
       id-token: write
