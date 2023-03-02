@@ -1,3 +1,5 @@
+name: "Cleanup AWS Test Account"
+
 on:
   schedule:
     - cron:  '0 * * * *'
@@ -6,7 +8,7 @@ on:
 jobs:
   cleanup_tests_account:
     name: Cleanup Test Account
-    environment: smooth-infra-tests 
+    environment: smooth-infra-tests
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -20,4 +22,4 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::994884320581:role/GitHubCICD
           role-session-name: github-cicd-smooth-infra
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
