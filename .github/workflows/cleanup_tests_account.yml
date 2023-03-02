@@ -37,8 +37,11 @@ jobs:
       - name: Download AWS Nuke
         if: steps.aws-nuke.outputs.cache-hit != 'true'
         run: |
-          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/${{ env.AWS_NUKE_VERSION }}/aws-nuke-${{ env.AWS_NUKE_VERSION }}-linux-arm64.tar.gz | tar -xz --strip-components=1 -C .
-          ls -latr
+          curl -L https://github.com/rebuy-de/aws-nuke/releases/download/v2.21.2/aws-nuke-v2.21.2-linux-arm64.tar.gz -o aws-nuke.tar.gz && \
+            tar -xf aws-nuke.tar.gz && \
+            mv aws-nuke-v2.21.2-linux-arm64 aws-nuke && \
+            rm -rf aws-nuke.tar.gz && \
+            chmod +x aws-nuke
             
       - name: Run AWS Nuke
         if: steps.aws-nuke.outputs.cache-hit == 'true'
