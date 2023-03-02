@@ -23,3 +23,7 @@ jobs:
           role-to-assume: arn:aws:iam::994884320581:role/GitHubCICD
           role-session-name: github-cicd-smooth-infra
           aws-region: ${{ vars.AWS_REGION }}
+
+      - name: sts get-caller-identity
+        run: |
+          aws sts get-caller-identity
