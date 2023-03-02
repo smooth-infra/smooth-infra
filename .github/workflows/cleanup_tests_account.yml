@@ -1,0 +1,21 @@
+on:
+  schedule:
+    - cron:  '0 * * * *'
+    
+jobs:
+  cleanup_tests_account:
+    name: Cleanup Test Account
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::994884320581:role/GitHubCICD
+          role-session-name: github-cicd-smooth-infra
+          aws-region: ${{ env.AWS_REGION }}
