@@ -27,4 +27,5 @@ jobs:
       - name: Download AWS Nuke
         run: |
           curl -L https://github.com/rebuy-de/aws-nuke/releases/download/v2.21.2/aws-nuke-v2.21.2-linux-arm64.tar.gz | tar -xz -C ${{ github.workspace }}
+          ls -latr
           aws-nuke -c build-aws_nuke.yml --profile smooth-infra-tests
