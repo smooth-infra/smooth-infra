@@ -1,0 +1,41 @@
+regions:
+  - eu-central-1
+  - global
+
+account-blocklist:
+  - "672416347635" # root account
+
+accounts:
+  "994884320581":
+    filters:
+      EC2VPC:
+        - vpc-0285e06e71103b0ac
+      EC2Subnet:
+        - subnet-069b26d0b8782a662
+        - subnet-0f3de9331cdfc9b14
+        - subnet-0153bb63814fbe69d
+      EC2DHCPOption:
+        - dopt-08d096bd0c9d96d71
+      EC2InternetGateway:
+        - igw-09eb31fa65daaa5c5
+      EC2RouteTable:
+        - rtb-05101207598fd29c9
+      EC2DefaultSecurityGroupRule: 
+        - sgr-0b8a3d84e9781679e
+        - sgr-0c38503cee9cdf39c
+      EC2InternetGatewayAttachment:
+        - igw-09eb31fa65daaa5c5 -> vpc-0285e06e71103b0ac
+      IAMRole:
+        - OrganizationAccountAccessRole
+        - GitHubCICD
+      IAMRolePolicyAttachment:
+        - "GitHubCICD -> PowerUserAccess"
+        - "OrganizationAccountAccessRole -> AdministratorAccess"
+      IAMOpenIDConnectProvider:
+        - arn:aws:iam::994884320581:oidc-provider/token.actions.githubusercontent.com
+# resource-types:
+#   excludes:
+#     - EC2RouteTable
+#     - EC2InternetGatewayAttachment
+#     - EC2DefaultSecurityGroupRule
+#     - EC2Subnet
