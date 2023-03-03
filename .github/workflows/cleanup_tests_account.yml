@@ -45,4 +45,4 @@ jobs:
       - name: Run AWS Nuke
         if: steps.aws-nuke.outputs.cache-hit == 'true'
         run: |
-          ./aws-nuke -c build/aws_nuke.yml --force
+          ./aws-nuke -c build/aws_nuke.yml --force --force-sleep 3
