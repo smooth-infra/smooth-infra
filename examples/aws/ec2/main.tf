@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.aws_region
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -12,6 +16,10 @@ data "aws_ami" "ubuntu" {
   }
 
   owners = ["099720109477"] # Canonical
+}
+
+variable "aws_region" {
+  type = string
 }
 
 variable "instance_name" {

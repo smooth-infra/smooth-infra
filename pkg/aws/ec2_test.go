@@ -23,6 +23,7 @@ func TestIfEc2Exists(t *testing.T) {
 
 	apply, cleanupTerraform := setupTerraform(t, tfWorkingDir, map[string]interface{}{
 		"instance_name": expectedName,
+		"aws_region":    AWS_DEFAULT_REGION,
 	})
 	defer cleanupTerraform()
 	apply()
