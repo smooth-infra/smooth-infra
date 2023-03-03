@@ -9,8 +9,6 @@ import (
 )
 
 func TestIfCanExecuteFailingTests(t *testing.T) {
-	t.Parallel()
-
 	yamlConfig := &yaml.BaseStructure{
 		Version: 1,
 		Tests: []yaml.Test{

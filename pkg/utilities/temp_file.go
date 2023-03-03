@@ -6,8 +6,6 @@ import (
 )
 
 func CreateTestFile(t *testing.T, data string) (*os.File, func()) {
-	t.Parallel()
-
 	tempFile, err := os.CreateTemp("", "outputs.json")
 	if err != nil {
 		t.Fatalf("Error creating temporary file: %v", err)
