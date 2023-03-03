@@ -11,23 +11,31 @@ import (
 )
 
 func TestProcessSimpleYaml(t *testing.T) {
+	t.Parallel()
+
 	config, err := Process(getTestData("output.vars"))
 	require.Nil(t, err)
 	assert.Equal(t, "output.vars", config.Input["terraform"].OutputsFile, "The outputs_file is not what is expected")
 }
 
 func TestProcessingOfInvalidYaml(t *testing.T) {
+	t.Parallel()
+
 	_, err := Process("invalid yaml")
 	require.NotNil(t, err)
 }
 
 func TestIfCanDetermineInputName(t *testing.T) {
+	t.Parallel()
+
 	config, err := Process(getTestData("output.vars"))
 	require.Nil(t, err)
 	assert.Equal(t, "terraform", config.GetInputName(), "The input name is not what is expected")
 }
 
 func TestIfCanReplaceTerraformOutputsToTests(t *testing.T) {
+	t.Parallel()
+
 	outputs := `
 {
   "address": {

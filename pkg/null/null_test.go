@@ -7,5 +7,7 @@ import (
 )
 
 func TestNull(t *testing.T) {
+	t.Parallel()
+
 	require.Nil(t, Null(t, map[string]interface{}{}, map[string]interface{}{}))
 }

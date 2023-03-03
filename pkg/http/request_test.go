@@ -7,6 +7,8 @@ import (
 )
 
 func TestIfCanMakeRequestGivenParamsAndExpectedStatusCode(t *testing.T) {
+	t.Parallel()
+
 	params := map[string]interface{}{"address": "google.com", "secure": false}
 	expects := map[string]interface{}{"status_code": 200}
 

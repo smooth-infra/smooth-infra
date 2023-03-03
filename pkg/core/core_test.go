@@ -11,6 +11,8 @@ import (
 )
 
 func TestIfItCanRunASimpleSuccessfulTest(t *testing.T) {
+	t.Parallel()
+
 	outputs := `
 {
   "address": {

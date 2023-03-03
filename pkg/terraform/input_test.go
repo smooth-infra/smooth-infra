@@ -9,6 +9,8 @@ import (
 )
 
 func TestCanFetchTerraformOutputValuesFromFile(t *testing.T) {
+	t.Parallel()
+
 	outputs := `
     {
       "test_string": {
