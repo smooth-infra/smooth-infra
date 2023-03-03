@@ -33,9 +33,3 @@ accounts:
         - "OrganizationAccountAccessRole -> AdministratorAccess"
       IAMOpenIDConnectProvider:
         - arn:aws:iam::994884320581:oidc-provider/token.actions.githubusercontent.com
-# resource-types:
-#   excludes:
-#     - EC2RouteTable
-#     - EC2InternetGatewayAttachment
-#     - EC2DefaultSecurityGroupRule
-#     - EC2Subnet
