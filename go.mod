@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.15
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.87.0
 	github.com/gosimple/slug v1.13.1
-	github.com/gruntwork-io/terratest v0.41.11
+	github.com/gruntwork-io/terratest v0.41.15
 	github.com/stretchr/testify v1.8.2
 	gopkg.in/yaml.v3 v3.0.1
 )
