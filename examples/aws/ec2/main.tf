@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.aws_region
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -14,11 +18,19 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+variable "aws_region" {
+  type = string
+}
+
+variable "instance_name" {
+  type = string
+}
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
 
   tags = {
-    Name = "HelloWorld"
+    Name = var.instance_name
   }
 }
